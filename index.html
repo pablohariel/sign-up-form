@@ -4,76 +4,145 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initiascale=1.0">
   <link rel="stylesheet" href="./reset.css">
   <link rel="stylesheet" href="./styles.css">
 
   <title>Sign-up Form</title>
 </head>
 
-<body>
-  <header>
-    <div class="logo-wrapper">
-
+<body>  
+  <header class="header">
+    <div class="logo">
+      <img class="logo__img" src="./assets/images/logo.png" alt="logo">
+      <h1 class="logo__title">Odin</h1>
     </div>
-    <p class="img-attribute">Photo by <a
-        href="https://unsplash.com/@stevenerixon?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Steven
-        Erixon</a> on <a
-        href="https://unsplash.com/s/photos/runes?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-    </p>
+    <div class="attribute">
+      <p class="attribute__text">
+        Photo by 
+        <a 
+          class="attribute__link"
+          href="https://unsplash.com/@stevenerixon?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+        >
+          Steven Erixon
+        </a> 
+        on 
+        <a 
+          class="attribute__link"
+          href="https://unsplash.com/s/photos/runes?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+        >
+          Unsplash
+        </a>
+      </p>
+    </div>
   </header>
-  <main>
-    <header>
-      <p>
+  <main class="main">
+    <section class="section">
+      <p class="section__text">
         This is not a real online service! You know you need something like this in our life to help you realize your
         deepest dreams.
         Sign up now to get starded.
       </p>
-      <p>
+      <p class="section__text">
         You know you want to.
       </p>
-    </header>
-    <form action="">
-      <div class="input-wrapper">
-        <h1>Let's do this!</h1>
+    </section>
+    <form class="form" action="">
+      <h1 class="form__title">Let's do this!</h1>
 
-        <div class="left">
-          <div class="input-wrapper">
-            <label for="first-name">First name</label>
-            <input id="first-name" type="text" >
+      <div class="form__input-group">
+        <div class="input-group__left">
+          <div class="form__item">
+            <label class="form__label" for="first-name">First name</label>
+            <input class="form__input" id="first-name" type="text" name="first-name" placeholder="first name" minlength="4" maxlength="10" required>
+            <span class="form__span">* Min of 4 caracteres</span>
           </div>
-          <div class="input-wrapper">
-            <label for="email">Email</label>
-            <input id="email" type="email">
+          <div class="form__item">
+            <label class="form__label" for="email">Email</label>
+            <input class="form__input" id="email" type="email" name="email" placeholder="email" autocomplete="off" required>
+            <span class="form__span">* Must be a valid email address</span>
           </div>
-          <div class="input-wrapper">
-            <label for="password">Password</label>
-            <input id="password" type="password">
+          <div class="form__item">
+            <label class="form__label" for="password">Password</label>
+            <input class="form__input" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" type="password" name="password" placeholder="password" required>
+            <span class="form__span form__span-password-error">* Password invalid</span>
           </div>
         </div>
 
-        <div class="right">
-          <div class="input-wrapper">
-            <label for="last-name">Last name</label>
-            <input id="last-name" type="text">
+        <div class="input-group__right">
+          <div class="form__item">
+            <label class="form__label" for="last-name">Last name</label>
+            <input class="form__input" id="last-name" type="text" name="last-name" placeholder="last name" minlength="4" maxlength="10" required>
+            <span class="form__span">* Min of 4 caracteres</span>
           </div>
-          <div class="input-wrapper">
-            <label for="phone-number">Phone number</label>
-            <input id="phone-number" type="text">
+          <div class="form__item">
+            <label class="form__label" for="phone-number">Phone number</label>
+            <input class="form__input" id="phone-number" type="text" name="phone-number" placeholder="phone number" required>
+            <span class="form__span">* Must be a valid email address</span>
           </div>
-          <div class="input-wrapper">
-            <label for="confirm-password">Confirm password</label>
-            <input id="confirm-password" type="password">
+          <div class="form__item">
+            <label class="form__label" for="confirm-password">Confirm password</label>
+            <input class="form__input" id="confirm-password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" type="password" name="confirm-password" placeholder="confirm password" required>
+            <span class="form__span form__span-confirm-password-error">* Password invalid</span>
           </div>
         </div>
       </div>
 
-      <div class="btn-wrapper">
-        <button type="submit">Create Account</button>
-        <p>Already have an account? <a href="#">Log in</a></p>
+      <div class="form__button-group">
+        <button class="form__submit-button" type="submit">Create Account</button>
+        <p class="form__login-text">Already have an account? <a class="form__login-button" href="#">Log in</a></p>
       </div>
     </form>
   </main>
+
+  <script>
+    const passwordInputElement = document.getElementById('password')
+    const confirmPasswordInputElement = document.getElementById('confirm-password')
+    const passwordErrorElement = document.getElementsByClassName('form__span-password-error')[0]
+    const confirmPasswordErrorElement = document.getElementsByClassName('form__span-confirm-password-error')[0]
+
+    passwordInputElement.addEventListener('focusout', () => {
+      verifyPasswords(passwordInputElement.value, confirmPasswordInputElement.value)
+    })
+
+    confirmPasswordInputElement.addEventListener('focusout', () => {
+      verifyPasswords(passwordInputElement.value, confirmPasswordInputElement.value)
+    })
+
+
+    function verifyPasswords(password1, password2) {
+      if(password1 !== password2 && passwordInputElement.checkValidity() && confirmPasswordInputElement.checkValidity()) {
+        passwordInputElement.setCustomValidity("Invalid field.")
+        passwordErrorElement.textContent = '* Passwords do not match'
+
+        confirmPasswordInputElement.setCustomValidity("Invalid field.")
+        confirmPasswordErrorElement.textContent = ''
+      } else {
+        passwordErrorElement.textContent = '* Password invalid'
+        confirmPasswordErrorElement.textContent = '* Password invalid'
+
+        if(password1 === password2) {
+          if(passwordInputElement.value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/)) {
+            passwordInputElement.setCustomValidity("")
+          }
+
+          if(confirmPasswordInputElement.value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/)) {
+            confirmPasswordInputElement.setCustomValidity("")
+          }
+        } else {
+          if(passwordInputElement.value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/)) {
+            passwordInputElement.setCustomValidity("Invalid field.")
+            passwordErrorElement.textContent = '* Passwords do not match'
+          }
+
+          if(confirmPasswordInputElement.value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/)) {
+            confirmPasswordInputElement.setCustomValidity("Invalid field.")
+            confirmPasswordErrorElement.textContent = ''
+          }
+        }
+      }
+    }
+  </script>
 </body>
 
 </html>
